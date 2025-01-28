@@ -31,7 +31,7 @@ pipeline {
         stage('Approval') {
             steps {
                 script {
-                    def plan = readFile 's3bucket/tfplan.txt'
+                    def plan = readFile 'terraform/tfplan.txt'
                     input message: "Do you want to proceed with the Terraform action?",
                           parameters: [
                               text(name: 'Plan', description: 'Please review the code/plan once', defaultValue: plan)
@@ -49,7 +49,7 @@ pipeline {
             steps {
                 script {
                     // Make sure you're in the right directory
-                    dir('s3bucket') {
+                    dir('terraform') {
                         if (params.terraformAction == 'apply') {
                             sh 'terraform apply -input=false tfplan'
                         } else if (params.terraformAction == 'destroy') {
