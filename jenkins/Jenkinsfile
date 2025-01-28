@@ -13,14 +13,14 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'terraforn', url: 'https://github.com/ManojKRISHNAPPA/career-devops-micro.git'
+                git branch: 'terraforn', url: 'https://github.com/manjukolkar/devopstest.git'
             }
         }
 
         stage('Plan') {
             steps {
                 sh ''' 
-                    cd s3bucket
+                    cd terraform
                     terraform init
                     terraform plan -out=tfplan
                     terraform show -no-color tfplan > tfplan.txt
